@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.min.css" integrity="sha512-vEia6TQGr3FqC6h55/NdU3QSM5XR6HSl5fW71QTKrgeER98LIMGwymBVM867C1XHIkYD9nMTfWK2A0xcodKHNA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/stylesheets/chatroom.css">
+    <title><%= group %> Group</title>
+</head>
+
+<body>
+
+    <div class="container app">
+        <div class="row app-one">
+            <div class="col-sm-4 side">
+                <div class="side-one">
+                    <div class="row heading">
+                        <div class="col-sm-3 col-md-2 col-xs-2 heading-avatar">
+                            <div class="heading-avatar-icon">
+                                <img src="<%= img %>">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-4 heading-name0">
+                            <b><%= group %></b>
+                        </div>
+                        <div class="col-sm-2 col-xs-2 heading-compose  pull-right">
+                            <i class="fa fa-info-circle"></i>
+                        </div>
+                    </div>
+                    <div class="row searchBox">
+                        <div class="col-sm-12 searchBox-inner">
+                            <div class="form-group has-feedback">
+                                <input type="text" id="searchText" onkeyup="myFunction()" class="form-control" placeholder="Search for names.." title="Type in a name">
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row sideBar">
+
+                        <ul id="myUL">
+                            <li><b><span><%= member %> <sup style="font-size: 8px; color: red;">(You)</sup></span></b></li>
+                            <span id="memberList"></span>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="side-two">
+                    <div class="row newMessage-heading">
+                        <div class="row newMessage-main">
+                            <div class="col-sm-2 col-xs-2 newMessage-back">
+                                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-sm-10 col-xs-10 newMessage-title">
+                                Group info
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row composeBox">
+                        <div class="col-sm-12 composeBox-inner">
+                            <div class="col-sm-2 col-md-2 col-xs-2 heading-avatar">
+                                <div class="heading-avatar-icon">
+                                    <img src="<%= img %>">
+                                </div>
+                            </div>
+                            <div class="col-sm-10 col-xs-10 heading-name">
+                                <a class="heading-name-meta"><%= group %></a>
+                                <span style="font-size:10px;">Created 17/09/2021 at 14:30</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row composeBox">
+                        <div class="col-sm-12 composeBox-inner" style="background-color: white; padding: 30px !important;">
+                            <span style="color: gray; font-size: 15px;">About the group:</span>
+                            <br>
+                            <p style="font-size: 10px;">This group was created to exchange information about the <%= group %> programming language</p>
+                        </div>
+                    </div>
+                    <div class="row composeBox" style="position: absolute; bottom: 0; ">
+                        <div class="col-sm-12 composeBox-inner" style="display: flex;justify-content: center;align-items: center;">
+                            <p class="copyright">
+                                <span>Developed By <a style="color: black;" href="https://masodkhalili.ir/">Masoud Khalili</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-8 conversation">
+                <div class="row heading">
+
+                    <div class="col-sm-7 col-md-5 col-xs-5 heading-name">
+                        <a class="heading-name-meta">Number of members:</a>
+                        <span id="count-member-online" class="heading-online"></span>
+                    </div>
+                    <div class="col-sm-4 col-xs-6 col-xs-6  heading-dot pull-right">
+                        <div class="cc-rockmenu">
+                            <div class="rolling">
+                                <figure class="rolling_icon"><img src="https://img.icons8.com/ios/50/000000/exit.png" /></figure>
+                                <p><a onclick="Leave()"><span>Leave this Group</span></a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row message" id="conversation">
+                    <div class="row message-previous">
+                        <div class="col-sm-12 previous">
+                        </div>
+                    </div>
+                    
+
+                    
+
+                </div>
+
+                <div class="row reply">
+
+                    <form id="newMassege">
+                        <div class="col-sm-11 col-xs-11 reply-main">
+                            <textarea class="form-control" rows="1" id="comment"></textarea>
+                        </div>
+                        <div class="col-sm-1 col-xs-1 reply-send">
+                            <button type="submit" style="padding: 0;" id="sendBtn"><i class="fa fa-send fa-2x" aria-hidden="true"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.min.js" integrity="sha512-ZuxZDe3rBE+OMV5ki0VZC2MSCp6NaoTiDHvYenVag+L/Agxb+MMKHZqVNXFXYX/ruuRofd5setKzyCupZCURvQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="http://localhost:4000/socket.io/socket.io.js"></script>
+    <script src="/javascripts/chatroom.js"></script>
+    <script>
+
+        let group = '<%= group %>';
+        let member = '<%= member %>';
+
+        document.querySelector("#newMassege").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let comment = $("#comment").val();
+            
+            let data = {
+                comment: comment,
+                group: group,
+                member: member,
+                date :new Date().getHours()+":"+new Date().getMinutes()
+            };
+            socket.emit("send-comment", data)
+
+        })
+
+        function add_new_comment(info,myId) {
+            var massege =$("#conversation")
+            if(info.senderId == myId){
+                massege.append(`<div class="row message-body">
+                                            <div class="col-sm-12 message-main-sender">
+                                                <div class="sender">
+                                                    <span><b>${info.member}</b></span>
+                                                    <div class="message-text">${info.comment}</div>
+                                                    <span class="message-time pull-right">${info.date}</span>
+                                                </div>
+                                            </div>
+                                        </div>`).animate({scrollTop: massege.prop("scrollHeight")});;
+            }else{
+                massege.append(`<div class="row message-body">
+                                            <div class="col-sm-12 message-main-receiver">
+                                                <div class="receiver">
+                                                    <span><b>${info.member}</b></span>
+                                                    <div class="message-text">${info.comment}</div>
+                                                    <span class="message-time pull-right">${info.date}</span>
+                                                </div>
+                                            </div>
+                                        </div>`).animate({scrollTop: massege.prop("scrollHeight")});
+            }
+            $(".emojionearea-editor").text("");
+        }
+
+        const socket = io("http://localhost:4000");
+
+        socket.on("connect", () => {
+            console.log(`you are connected to io. You socket ID : ${socket.id}`)
+        });
+
+        socket.emit("join-member", {
+            member: member,
+            group: group
+        })
+
+        socket.on("get-comment", (info) => {
+            add_new_comment(info,socket.id)
+        });
+
+        socket.on('new-member-join', (members) => {
+            document.getElementById("count-member-online").innerText =`${members.length} members`;
+
+            members = members.filter(item => item !== member)
+            
+            $("#memberList").html(` `);
+
+            members.forEach((member) => {
+                $("#memberList").append(`<li><span>${member}</span></li>`);
+            })
+        })
+
+        socket.on("prev-comments", (comments) => {
+            comments.forEach(comments => {
+                add_new_comment(comments,socket.id);
+            })
+        })
+
+        function Leave() {
+            socket.emit("member-Leave", {
+                member: member,
+                group: group
+            });
+            window.location.href = "/";
+        }
+
+        
+    </script>
+</body>
+
+</html>
